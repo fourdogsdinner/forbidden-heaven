@@ -11,7 +11,7 @@ const APP = {
   // Books
   numberOfBooksPerPage: 20,
   bookStorageKey: "@books",
-  gifPerChar: 5000,
+  gifPerChar: 3000,
   totalGifs: 115,
 };
 

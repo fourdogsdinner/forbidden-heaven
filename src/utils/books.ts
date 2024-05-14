@@ -52,6 +52,23 @@ export const getBookIntroAsync = async (currentPage = 1) => {
 
 // Get Book with specific title
 export const getSingleBookAsync = async (title: string) => {
+  const dirs = await fs.readdir(BOOK_DIR, "utf-8");
+  const idx = dirs.findIndex((value: string) => value === title + ".txt");
+  const prev =
+    idx === -1 || idx === 0
+      ? null
+      : {
+          title: dirs[idx - 1].replace(".txt", ""),
+          href: `/book/${dirs[idx - 1].replace(".txt", "")}`,
+        };
+  const next =
+    idx === -1 || idx === dirs.length - 1
+      ? null
+      : {
+          title: dirs[idx + 1].replace(".txt", ""),
+          href: `/book/${dirs[idx + 1].replace(".txt", "")}`,
+        };
+
   const content = await fs.readFile(
     path.join(BOOK_DIR, title + ".txt"),
     "utf-8",
@@ -61,7 +78,7 @@ export const getSingleBookAsync = async (title: string) => {
 
   const gifs = await getRandomGifsAsync(numOfGifs || 3);
 
-  return { title, content, gifs };
+  return { title, content, gifs, prev, next };
 };
 
 export const getBookTitlesAsync = async () => {

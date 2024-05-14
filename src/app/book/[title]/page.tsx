@@ -2,6 +2,7 @@
 
 import BookContent from "~/components/book/BookContent";
 import FavoriteToggler from "~/components/book/FavoriteToggler";
+import PrevNext from "~/components/pagination/PrevNext";
 import { getBooksDataAsync, getSingleBookAsync } from "~/utils/books";
 
 export async function generateMetadata({
@@ -36,11 +37,7 @@ export default async function Book({ params }: { params: { title: never } }) {
         content={book?.content}
       />
       <BookContent content={book?.content} gifs={book?.gifs} />
-      <FavoriteToggler
-        className="mb-3"
-        title={decodeURI(title)}
-        content={book?.content}
-      />
+      <PrevNext prev={book.prev} next={book.next} />
     </div>
   );
 }

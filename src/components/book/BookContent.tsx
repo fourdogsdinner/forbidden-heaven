@@ -19,16 +19,17 @@ export default function BookContent({
   const renderItem = useCallback(
     (item: string, i: number) => (
       <div key={i}>
+        <p className="text-break" style={{ whiteSpace: "pre-wrap" }}>
+          {item}
+        </p>
         <img
           className="mb-3"
           width={"100%"}
           height={"auto"}
+          style={{ minHeight: "200px" }}
           alt={gifs[i]}
           src={gifs[i]}
         />
-        <p className="text-break" style={{ whiteSpace: "pre-wrap" }}>
-          {item}
-        </p>
       </div>
     ),
     [],
